@@ -14,7 +14,7 @@ int main()
 	bst->insert(7);
 	bst->insert(33);
 
-	bst->printInOrder();
+	bst->printPostOrder();
 
 	return 0;
 }
