@@ -8,13 +8,10 @@ using namespace std;
 
 int main()
 {
-	BinarySearchTree* bst = new BinarySearchTree(13);
-	bst->insert(19);
-	bst->insert(3);
-	bst->insert(7);
-	bst->insert(33);
+	vector<int> nums = {13,19,3,7,33};
+	BinarySearchTree* bst = new BinarySearchTree(nums);
 
-	bst->printPostOrder();
+	bst->printInOrder();
 
 	return 0;
 }

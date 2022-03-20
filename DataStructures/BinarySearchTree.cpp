@@ -2,16 +2,16 @@
 
 Node::Node(int data_)
 {
-	data = data_;
+    data = data_;
     left = NULL;
     right = NULL;
 }
 
 Node::Node(int data_, Node* left_, Node* right_)
 {
-	data = data_;
-	left = left_;
-	right = right_;
+    data = data_;
+    left = left_;
+    right = right_;
 }
 
 BinarySearchTree::BinarySearchTree()
@@ -26,6 +26,7 @@ BinarySearchTree::BinarySearchTree(int num)
 
 BinarySearchTree::BinarySearchTree(vector<int> nums)
 {
+    _root = NULL;
     for (int num : nums) {
         insert(num);
     }
@@ -135,7 +136,14 @@ std::vector<int> BinarySearchTree::getPostOrderOfNode(Node* node)
 
 void BinarySearchTree::insert(int num)
 {
-    insertToNode(num, _root);
+    if (!_root)
+    {
+        _root = insertToNode(num, _root);
+    }
+    else
+    {
+        insertToNode(num, _root);
+    }
 }
 
 vector<int> BinarySearchTree::getSorted()
