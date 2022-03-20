@@ -6,8 +6,8 @@
 using namespace std;
 
 struct Node {
-	Node* left;
-	Node* right;
+	struct Node* left;
+	struct Node* right;
 	int data;
 
 	Node(int data_);
@@ -18,8 +18,6 @@ struct Node {
 class BinarySearchTree {
 	Node* _root;
 
-	void _insertToNode(int num, Node* node);
-
 public:
 	BinarySearchTree();
 
@@ -27,7 +25,7 @@ public:
 
 	BinarySearchTree(vector<int> nums);
 
-	static void insertToNode(int num, Node* node);
+	static Node* insertToNode(int num, Node* node);
 
 	static void printInOrderOfNode(Node* node);
 

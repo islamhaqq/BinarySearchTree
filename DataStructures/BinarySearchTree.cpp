@@ -2,6 +2,8 @@
 
 Node::Node(int data_) {
 	data = data_;
+    left = NULL;
+    right = NULL;
 }
 
 Node::Node(int data_, Node* left_, Node* right_) {
@@ -10,19 +12,9 @@ Node::Node(int data_, Node* left_, Node* right_) {
 	right = right_;
 }
 
-void BinarySearchTree::_insertToNode(int num, Node* node) {
-    if (!node) {
-        node = new Node(num);
-    }
-    else if (num > node->data) {
-        _insertToNode(num, node->right);
-    }
-    else if (num < node->data) {
-        _insertToNode(num, node->left);
-    }
+BinarySearchTree::BinarySearchTree() {
+    _root = NULL;
 }
-
-BinarySearchTree::BinarySearchTree() {}
 
 BinarySearchTree::BinarySearchTree(int num) {
     _root = new Node(num);
@@ -34,23 +26,27 @@ BinarySearchTree::BinarySearchTree(vector<int> nums) {
     }
 }
 
-void BinarySearchTree::insertToNode(int num, Node* node) {
-    // inserting a num to a node is just
-    // inserting to the left node if it is smaller
-    // inserting to the right node if it is bigger
-    // and doing nothing if it is the same
+Node* BinarySearchTree::insertToNode(int num, Node* node) {
     if (!node) {
         node = new Node(num);
+        return node;
     }
     else if (num > node->data) {
-        cout << "inserted before: " << node->right << endl;
-        BinarySearchTree::insertToNode(num, node->right);
-        //node->right = new Node(num);
-        cout << "inserted successfully: " << node->right << endl;
+        if (!node->right) {
+            node->right = BinarySearchTree::insertToNode(num, node->right);
+        }
+        else {
+            BinarySearchTree::insertToNode(num, node->right);
+        }
     }
     else if (num < node->data) {
-        cout << "inserting " << num << " to the left of " << node->data << endl;
-        BinarySearchTree::insertToNode(num, node->left);
+        if (!node->left) {
+			node->left = BinarySearchTree::insertToNode(num, node->left);
+
+        }
+        else {
+			BinarySearchTree::insertToNode(num, node->left);
+        }
     }
 }
 
@@ -84,7 +80,7 @@ vector<int> BinarySearchTree::getInOrderOfNode(Node* node) {
 }
 
 void BinarySearchTree::insert(int num) {
-    _insertToNode(num, _root);
+    insertToNode(num, _root);
 }
 
 vector<int> BinarySearchTree::getSorted() {
